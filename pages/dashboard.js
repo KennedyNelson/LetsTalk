@@ -21,7 +21,7 @@ export default function Dashboard() {
   const route = useRouter();
   const [user, loading] = useAuthState(auth);
   const [posts, setPosts] = useState([]);
-  const postsCount = useSelector((state) => state.posts.value)
+  const {value, loadingStatus} = useSelector((state) => state.posts)
 
   const dispatch = useDispatch()
 
@@ -53,7 +53,7 @@ export default function Dashboard() {
     <div>
       <div className="flex gap-2">
         <h1>Your posts</h1>
-        <p className="bg-green-500 text-white rounded-lg font-medium px-2">{postsCount} post{postsCount != 1 ? 's' : ''}</p>
+        {!loadingStatus && <p className="bg-green-500 text-white rounded-lg font-medium px-2">{value} post{value != 1 ? 's' : ''}</p>}
       </div>
       <div>
         {posts.map((post) => {

@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   value: 0,
+  loadingStatus: true
 }
 
 export const postsSlice = createSlice({
@@ -10,6 +11,7 @@ export const postsSlice = createSlice({
   reducers: {
     setposts: (state, action) => {
       state.value = action.payload
+      state.loadingStatus = false
     },
     increment: (state) => {
       // Redux Toolkit allows us to write "mutating" logic in reducers. It
@@ -21,10 +23,13 @@ export const postsSlice = createSlice({
     decrement: (state) => {
       state.value -= 1
     },
+    setLoading: (state, action) => {
+      state.loading = action.payload
+    }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { increment, decrement, setposts } = postsSlice.actions
+export const { increment, decrement, setposts, setLoading } = postsSlice.actions
 
 export default postsSlice.reducer

@@ -10,7 +10,7 @@ import { setposts } from "../slices/postsSlice";
 export default function Home() {
   //Create a state with all the posts
   const [allPosts, setAllPosts] = useState([]);
-  const posts = useSelector((state) => state.posts.value)
+  const {value, loadingStatus} = useSelector((state) => state.posts)
   const dispatch = useDispatch()
 
 
@@ -39,7 +39,7 @@ export default function Home() {
       <div className="my-12 text-lg font-medium">
         <div className="flex gap-2">
         <h2>See what other people are saying </h2>
-        <p className="bg-green-500 text-white rounded-lg font-medium px-2">{posts} post{posts != 1 ? 's' : ''}</p>
+        {!loadingStatus && <p className="bg-green-500 text-white rounded-lg font-medium px-2">{value} post{value != 1 ? 's' : ''}</p>}
         </div>
         {allPosts.map((post) => (
           <Message key={post.id} {...post}>
